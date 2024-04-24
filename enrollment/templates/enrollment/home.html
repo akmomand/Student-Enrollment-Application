@@ -1,0 +1,66 @@
+{% extends 'enrollment/base.html' %}
+{% block content %}
+
+<div class = "container mt-5 text-center" style="color: white; background-color: #1F2833; padding: 20px;">
+	<h4>Enrollment Overview</h4>
+	<div class="mt-5">
+		<canvas id="mycanvas" height="100px" width="300px" style="background-color:#C5C6C7;"></canvas>
+	</div>
+	<div class="mt-5">
+		<canvas id="mypiecanvas" height="100px" width="150px" style="background-color:#C5C6C7;"></canvas>
+	</div>
+	
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<script>
+	var mychart = document.getElementById('mycanvas')
+	var newchart = new Chart(mychart, {
+		type: 'bar',
+		data: {
+			labels: ['Freshman', 'Sophomore', 'Junior', 'Senior'],
+			datasets: [{
+				label: 'Student Enrollment',
+				data: [{{ freshman }},{{ sophomore }},{{ junior }},{{senior }}],
+				backgroundColor: ['rgb(155, 54, 55, 0.7)', 'rgb(136, 8, 8, 0.7)', 
+				'rgb(255, 99, 132, 0.7)', 'rgb(75, 192, 192, 0.7)']
+				
+			}]		
+		},
+		options: {
+			scales: {
+				y: {
+					ticks: {
+						beginAtZero: true,
+						stepSize: 1
+					}
+				}
+			}
+		}
+	})
+</script>
+
+ 
+<script>
+	var mypiechart = document.getElementById('mypiecanvas')
+	var newpiechart = new Chart(mypiechart, {
+		type: 'pie',
+		data: {
+			labels: ['Physics', 'IT', 'Chemistry', 'Marketing', 'Stats'],
+			datasets: [{
+				label: 'Student Majors Overview',
+				data: [{{ physics }},{{ it }},{{ chemistry }},{{ marketing }}, {{ stats }}],
+				backgroundColor: ['rgb(155, 54, 55, 0.7)','rgb(116, 59, 209, 0.7)','rgb(114, 93, 148, 0.7)',
+				'rgb(75, 56, 107, 0.7)','rgb(69, 45, 110, 0.7)']
+			}]		
+		},
+	})
+	
+</script>
+
+
+
+
+{% endblock %}
